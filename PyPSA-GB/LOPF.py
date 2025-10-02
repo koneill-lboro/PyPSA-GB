@@ -5,7 +5,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 import cartopy.crs as ccrs
 
-from . import data_reader_writer
+import data_reader_writer
 
 import time
 

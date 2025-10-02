@@ -1,6 +1,5 @@
 from logging import raiseExceptions
 import pandas as pd
-from import distance_calculator as dc
 
 
 def read_historical_demand_data():
@@ -207,7 +206,7 @@ def write_loads_p_set(
     elif time_step == 1.0:
         freq = "h"
     else:
-        raise Exception("Time step not recognised")
+        raise ValueError("Time step not recognised")
 
     dti = pd.date_range(start=start, end=end, freq=freq)
 
@@ -282,7 +281,7 @@ def write_loads_p_set(
                 header=4,
                 dtype=str,
             )
-        elif FES == None:
+        elif FES is None:
             raise Exception("Please choose a FES year.")
 
         df_FES_demand = df_FES.loc[df_FES["Data item"] == "GBFES System Demand: Total"]
@@ -359,7 +358,7 @@ def write_loads_p_set(
         for j in norm.columns:
             df_loads_p_set_LOPF[j] = scaled_load * norm[j].values
 
-    if FES == 2022 and scale_to_peak == True:
+    if FES == 2022 and scale_to_peak is True:
         # if FES is 22 then going to scale again using the peak demand from regional breakdown
         df_year_LOPF = pd.DataFrame()
         for j in norm.columns:
@@ -431,9 +430,9 @@ def read_regional_breakdown_load(scenario, year, networkmodel):
     df_gsp_data.rename(columns={"Latitude": "y", "Longitude": "x"}, inplace=True)
 
     if networkmodel == "Reduced":
-        from .distance_calculator import map_to_bus as map_to
+        from distance_calculator import map_to_bus as map_to
     elif networkmodel == "Zonal":
-        from .allocate_to_zone import map_to_zone as map_to
+        from allocate_to_zone import map_to_zone as map_to
 
     df_gsp_data["Bus"] = map_to(df_gsp_data)
     # now
