@@ -1,13 +1,13 @@
 """Script for running a network constrained linear optimal power flow of PyPSA-GB"""
 
-import time
-
-import cartopy.crs as ccrs
+import pypsa
 import matplotlib.pyplot as plt
 import pandas as pd
-import pypsa
+import cartopy.crs as ccrs
 
 from . import data_reader_writer
+
+import time
 
 # start = '2050-01-01 00:00:00'
 # end = '2050-12-31 23:30:00'

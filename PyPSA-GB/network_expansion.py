@@ -1,9 +1,9 @@
 """Script for running a network constrained linear optimal power flow of PyPSA-GB"""
 
-import cartopy.crs as ccrs
+import pypsa
 import matplotlib.pyplot as plt
 import pandas as pd
-import pypsa
+import cartopy.crs as ccrs
 
 from . import data_reader_writer
 

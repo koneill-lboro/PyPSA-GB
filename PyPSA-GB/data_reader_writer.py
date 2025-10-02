@@ -10,25 +10,21 @@ but classes could be used to improve readability
 
 """
 
+from . import snapshots
+from . import buses
+from . import lines
+from . import storage
+from . import generators
+from . import renewables
+from . import marginal_costs
+from . import loads
+from . import interconnectors
+from . import distribution
+from . import marine_scenarios
+from . import add_P2G
+import pandas as pd
 import os
 import shutil
-
-import pandas as pd
-
-from . import (
-    add_P2G,
-    buses,
-    distribution,
-    generators,
-    interconnectors,
-    lines,
-    loads,
-    marginal_costs,
-    marine_scenarios,
-    renewables,
-    snapshots,
-    storage,
-)
 
 # turn off chained assignment errors
 pd.options.mode.chained_assignment = None  # default='warn'
@@ -215,15 +211,14 @@ if __name__ == "__main__":
                         year,
                         demand_dataset=demand_dataset,
                         year_baseline=year_baseline,
-                        scenario=scenario,  # type: ignore
+                        scenario=scenario,
                         FES=2022,
                         merge_generators=True,
                         scale_to_peak=True,
                         networkmodel="Reduced",
                         P2G=True,
-                        floating_wind_scenario="Mid",
-                        wave_scenario="Mid",
-                        tidal_stream_scenario="Mid",
+                        marine_modify=True,
+                        marine_scenario="Mid",
                     )
 
     # start = '2040-02-28 00:00:00'

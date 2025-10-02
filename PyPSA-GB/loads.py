@@ -1,8 +1,6 @@
 from logging import raiseExceptions
-
 import pandas as pd
-
-from . import distance_calculator as dc
+from import distance_calculator as dc
 
 
 def read_historical_demand_data():
