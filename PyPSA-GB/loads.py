@@ -1,4 +1,3 @@
-from logging import raiseExceptions
 import pandas as pd
 
 
@@ -43,7 +42,8 @@ def read_historical_demand_data():
 
 
 def read_future_profile_data():
-    """reads the future demand profile data from Staffel et al - https://doi.org/10.1016/j.energy.2015.06.082
+    """reads the future demand profile data from Staffel et
+     al - https://doi.org/10.1016/j.energy.2015.06.082
 
     Parameters
     ----------
@@ -132,7 +132,7 @@ def write_loads(year, networkmodel="Reduced"):
                     "N. Ireland",
                 ]
             )
-        except:
+        except KeyError:
             pass
     # delete the IC loads
     df_buses.to_csv("LOPF_data/loads.csv", index=True, header=True)
@@ -170,7 +170,8 @@ def write_loads_p_set(
     elif dataset == "eload":
         df_hd = read_future_profile_data()
         df_hd.rename(columns={"eLOAD": "load"}, inplace=True)
-        # if modelled year is a leap year need to add in 29th feb (copy 28th Feb)
+        # if modelled year is a leap year need to add in 29th
+        # feb (copy 28th Feb)
         if year % 4 == 0:
             df_hd.index = pd.to_datetime(
                 {
@@ -210,7 +211,10 @@ def write_loads_p_set(
 
     dti = pd.date_range(start=start, end=end, freq=freq)
 
-    df_distribution = pd.read_csv("../data/demand/Demand_Distribution.csv", index_col=0)
+    df_distribution = pd.read_csv(
+        "../data/demand/Demand_Distribution.csv",
+        index_col=0,
+    )
     df_distribution = df_distribution.loc[
         :, ~df_distribution.columns.str.contains("^Unnamed")
     ]
@@ -282,7 +286,7 @@ def write_loads_p_set(
                 dtype=str,
             )
         elif FES is None:
-            raise Exception("Please choose a FES year.")
+            raise ValueError("Please choose a FES year.")
 
         df_FES_demand = df_FES.loc[df_FES["Data item"] == "GBFES System Demand: Total"]
         df_FES_demand = df_FES_demand.loc[df_FES_demand["Scenario"] == scenario]

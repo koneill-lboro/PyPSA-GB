@@ -1,6 +1,6 @@
-
 import os
 import shutil
+
 try:
     import ruamel.yaml
 except ImportError:

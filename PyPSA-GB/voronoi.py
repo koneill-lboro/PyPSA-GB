@@ -24,7 +24,6 @@ import pyproj
 import matplotlib.pyplot as plt
 
 
-
 df_network = pd.read_csv("LOPF_data/buses.csv")
 lon = df_network["x"].values
 lat = df_network["y"].values
